@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+<a href="/signup">Sign Up</a><br>
+{{#if isLoggedIn}}
+    <a href="/profile">Profile</a><br>
+    <a href="/pages">Pages</a><br>
+    <a href="/users">Users</a><br>
+    <a href="/logout">Log Out</a>
+    <p>Logged in as {{username}}</p>
+    <p>Not {{username}}? <a href="/login">Log in</a> as someone else.</p>
+{{else}}
+    <a href="/login">Log In</a>
+{{/if}}

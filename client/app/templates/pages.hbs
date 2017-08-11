@@ -1,0 +1,8 @@
+{{#each sortedPages as |page|}}
+  <h2>{{page.name}}</h2>
+  <h3>{{#link-to "details" page.id}}{{page.uri}}{{/link-to}}</h3>
+{{else}}
+  <h2>No pages</h2>
+{{/each}}
+{{outlet}}
+{{link-to " New" "new" class="btn btn-primary glyphicon glyphicon-plus"}}

@@ -1,0 +1,25 @@
+<div class="header">
+  <h2>Signup Page</h2>
+</div>
+{{#bs-form formLayout=formLayout model=(changeset this UserValidations) onSubmit=(action "signup") as |form|}}
+  {{form.element controlType="email" label="Email" placeholder="Email" property="email"
+                 id="email" required=true}}
+  {{form.element controlType="username" label="Username" placeholder="Username" property="username"
+                 id="username" required=true}}
+  {{form.element controlType="password" label="Password" placeholder="Password" property="password"
+                 id="password" required=true helpText="Minimum 6 characters"}}
+  {{form.element controlType="password" label="Password Confirmation" placeholder="Confirm Password"
+                 property="passwordConfirmation" id="passwordConfirmation" required=true}}
+
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Signup" type="primary" buttonType="submit"}}
+
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Signin via Twitter" pendingText="Authenticating..."
+              resolvedText="Authentication complete!" onClick=(action "signInViaTwitter")}}
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Signin via Facebook" pendingText="Authenticating..."
+              resolvedText="Authentication complete!" onClick=(action "signInViaFacebook")}}
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Signin via Google" pendingText="Authenticating..."
+              resolvedText="Authentication complete!" onClick=(action "signInViaGoogle")}}
+{{/bs-form}}
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}

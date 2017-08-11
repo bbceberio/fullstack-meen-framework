@@ -1,0 +1,15 @@
+<h1>Welcome to my website!</h1>
+{{#bs-nav type="tabs" justified=justified stacked=stacked as |nav|}}
+  {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
+  {{#if session.isAuthenticated}}
+    {{#nav.item}}{{#nav.link-to "pages"}}Pages{{/nav.link-to}}{{/nav.item}}
+    {{#nav.item}}{{#nav.link-to "users"}}Users{{/nav.link-to}}{{/nav.item}}
+  {{/if}}
+{{/bs-nav}}
+{{outlet}}
+{{#if session.isAuthenticated}}
+  {{bs-button icon="glyphicon glyphicon-log-out" defaultText="Logout" type="danger" onClick=(action "logout")}}
+{{else}}
+  {{link-to " Signup" "signup" class="btn btn-info glyphicon glyphicon-log-in"}}
+  {{link-to " Login" "login" class="btn btn-info glyphicon glyphicon-log-in"}}
+{{/if}}

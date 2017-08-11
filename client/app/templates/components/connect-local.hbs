@@ -1,0 +1,117 @@
+{{json-pretty obj=user}}
+<div class="container">
+  <div class="page-header text-center">
+    <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+    {{link-to "Home" "index" class="btn btn-default btn-sm glyphicon glyphicon-home"}}
+  </div>
+
+  <div class="row">
+
+    <!-- LOCAL INFORMATION -->
+    <div class="col-sm-6">
+      <div class="well">
+        <h3><span class="fa fa-user"></span> Local</h3>
+
+        {{#if user.local.token}}
+          <p>
+            <strong>id</strong>: {{user.id}}<br>
+            <strong>username</strong>: {{user.local.username}}<br>
+            <strong>email</strong>: {{user.local.email}}<br>
+            <strong>token</strong>: {{user.local.token}}
+          </p>
+          {{#if (gt tokens.size 1)}}
+            {{bs-button icon="glyphicon glyphicon-link" defaultText="Unlink Local" pendingText="Authenticating..."
+                        resolvedText="Authentication complete!" onClick=(action "unlinkLocal")}}
+          {{/if}}
+        {{else}}
+          {{link-to "Connect Local" "signup" class="btn btn-default btn-sm glyphicon glyphicon-link"}}
+        {{/if}}
+
+      </div>
+    </div>
+
+    <!-- FACEBOOK INFORMATION -->
+    <div class="col-sm-6">
+      <div class="well">
+        <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+        {{#if user.facebook.token}}
+          <p>
+            <strong>id</strong>: {{user.facebook.id}}<br>
+            <strong>token</strong>: {{user.facebook.token}}<br>
+            <strong>email</strong>: {{user.facebook.email}}<br>
+            <strong>name</strong>: {{user.facebook.name}}<br>
+          </p>
+
+          {{#if (gt tokens.size 1)}}
+            {{bs-button icon="glyphicon glyphicon-link" defaultText="Unlink Facebook" pendingText="Authenticating..."
+                        resolvedText="Authentication complete!" onClick=(action "unlinkFacebook")}}
+          {{/if}}
+        {{else}}
+          {{bs-button icon="glyphicon glyphicon-link" defaultText="Connect Facebook"
+                      pendingText="Connecting..." resolvedText="Connection complete!"
+                      onClick=(action "connectFacebook")}}
+        {{/if}}
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- TWITTER INFORMATION -->
+    <div class="col-sm-6">
+      <div class="well">
+        <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+
+        {{#if user.twitter.token}}
+          <p>
+            <strong>id</strong>: {{user.twitter.id}}<br>
+            <strong>token</strong>: {{user.twitter.token}}<br>
+            <strong>display name</strong>: {{user.twitter.displayName}}<br>
+            <strong>username</strong>: {{user.twitter.username}}
+          </p>
+
+          {{#if (gt tokens.size 1)}}
+            {{bs-button icon="glyphicon glyphicon-link" defaultText="Unlink Twitter" pendingText="Authenticating..."
+                        resolvedText="Authentication complete!" onClick=(action "unlinkTwitter")}}
+          {{/if}}
+        {{else}}
+          {{bs-button icon="glyphicon glyphicon-link" defaultText="Connect Twitter"
+                      pendingText="Connecting..." resolvedText="Connection complete!"
+                      onClick=(action "connectTwitter")}}
+        {{/if}}
+
+      </div>
+    </div>
+
+    <!-- GOOGLE INFORMATION -->
+    <div class="col-sm-6">
+      <div class="well">
+        <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
+
+        {{#if user.google.token}}
+          <p>
+            <strong>id</strong>: {{user.google.id}}<br>
+            <strong>token</strong>: {{user.google.token}}<br>
+            <strong>email</strong>: {{user.google.email}}<br>
+            <strong>name</strong>: {{user.google.name}}
+          </p>
+
+          {{#if (gt tokens.size 1)}}
+            {{bs-button icon="glyphicon glyphicon-link" defaultText="Unlink Google" pendingText="Authenticating..."
+                        resolvedText="Authentication complete!" onClick=(action "unlinkGoogle")}}
+          {{/if}}
+        {{else}}
+          {{bs-button icon="glyphicon glyphicon-link" defaultText="Connect Google"
+                      pendingText="Connecting..." resolvedText="Connection complete!"
+                      onClick=(action "connectGoogle")}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+{{yield}}

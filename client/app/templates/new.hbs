@@ -1,0 +1,24 @@
+{{#bs-form formLayout="vertical" model=(changeset this PageValidations) onSubmit=(action "save") as |form|}}
+  {{form.element controlType="name" label="Name*" placeholder="Name" property="name" id="name" required=true}}
+  {{form.element controlType="uri" label="URI*" placeholder="URI" property="uri" id="uri" required=true}}
+  {{form.element controlType="title" label="Title" placeholder="Title" property="title" id="title" }}
+  {{form.element controlType="checkbox" label="Active" property="isActive" checked=isActive}}
+
+  <div class="form-group">
+    <label for="content" class="control-label">Content:</label>
+    {{ember-ace lines=10 value=value update=(action 'update')}}
+  </div>
+
+  <div class="form-group">
+    <label for="htmlContent" class="control-label">Preview:</label>
+    <div id="htmlContent">{{html}}</div>
+  </div>
+
+  {{bs-button icon="glyphicon glyphicon-ok" defaultText="Add" type="primary" buttonType="submit"}}
+{{/bs-form}}
+
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+
+{{outlet}}

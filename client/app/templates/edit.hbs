@@ -1,0 +1,30 @@
+{{#bs-form formLayout="vertical" model=changeset onSubmit=(action "edit") as |form|}}
+  {{form.element controlType="name" label="Name" placeholder="Name" property="name" id="name" required=true}}
+  {{form.element controlType="uri" label="URI" placeholder="URI" property="uri" id="uri" required=true}}
+  {{form.element controlType="title" label="Title" placeholder="Title" property="title" id="title" }}
+  {{form.element controlType="checkbox" label="Active" property="isActive"}}
+
+  <div class="form-group">
+    <label for="content" class="control-label">Content:</label>
+    {{ember-ace lines=10 value=changeset.content update=(action 'update')}}
+  </div>
+  <div class="form-group">
+    <label for="htmlContent" class="control-label">Preview:</label>
+    <div id="htmlContent">{{html}}</div>
+  </div>
+  <div class="form-group">
+    <label for="createdOn" class="control-label">Created On:</label>
+    {{changeset.createdOn}}
+  </div>
+  <div class="form-group">
+    <label for="modifiedOn" class="control-label">Modified On:</label>
+    {{changeset.modifiedOn}}
+  </div>
+
+  {{bs-button icon="glyphicon glyphicon-pencil" defaultText="Edit" type="success" buttonType="submit"}}
+  {{bs-button defaultText="Cancel" type="default" onClick=(action "rollback" changeset)}}
+  <button class="btn btn-primary glyphicon glyphicon-arrow-left" {{action "cancel"}}>Back</button>
+  {{bs-button icon="glyphicon glyphicon-trash" defaultText="Delete" type="warning" onClick=(action "delete")}}
+{{/bs-form}}
+
+{{outlet}}

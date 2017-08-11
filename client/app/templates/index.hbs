@@ -1,0 +1,15 @@
+<h2>EmberJS</h2>
+<p>Kickass! It's working!</p>
+{{json-pretty obj=model}}
+{{#each model.child as |div|}}
+  {{#each div.child as |par|}}
+    {{#if (eq par.node "element")}}
+      {{#each par.child as |txt|}}
+        <p>{{txt.text}}</p>
+      {{/each}}
+    {{else if (eq par.node "comment")}}
+      <p>{{par.text}}</p>
+    {{/if}}
+  {{/each}}
+{{/each}}
+{{outlet}}

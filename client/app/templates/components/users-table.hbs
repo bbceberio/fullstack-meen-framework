@@ -1,0 +1,33 @@
+{{#each users as |user|}}
+  {{json-pretty obj=user}}
+  {{#if (eq id user.id)}}
+    {{link-to "Profile" "profile"}}
+  {{else}}
+    <div>{{user.id}}</div>
+    <button onclick={{action remove user.id}}>remove</button>
+  {{/if}}
+{{else}}
+  <h2>No users</h2>
+{{/each}}
+{{outlet}}
+{{#light-table table as |t|}}
+  {{t.head}}
+
+  {{#t.body as |body|}}
+    {{#body.expanded-row as |row|}}
+      Hello <b>{{row.firstName}}</b>
+    {{/body.expanded-row}}
+
+    {{#if isLoading}}
+      {{#body.loader}}
+        Loading...
+      {{/body.loader}}
+    {{/if}}
+
+    {{#if table.isEmpty}}
+      {{#body.no-data}}
+        No users found.
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+{{/light-table}}

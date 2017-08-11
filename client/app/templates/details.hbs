@@ -1,0 +1,16 @@
+<h2>{{model.title}}</h2>
+<h3>{{model.id}}</h3>
+<p>Name: {{model.name}}</p>
+<p>URI: {{model.uri}}</p>
+<p>Content: {{html-safe model.content}}</p>
+<p>Created On: {{model.createdOn}}<br/>Modified On: {{model.modifiedOn}}</p>
+<p>Active: {{model.isActive}}</p>
+<p>HTML: <code>{{model.content}}</code></p>
+<p>JSON: <code>{{model.json}}</code></p>{{json-pretty obj=model.parse}}
+<p>Details:<br>
+  {{my-canvas content=model.parse}}
+</p>
+{{outlet}}
+{{link-to "Edit" "edit" model.id class="btn btn-primary glyphicon glyphicon-edit"}}
+{{link-to "Back" "pages" class="btn btn-default glyphicon glyphicon-arrow-left"}}
+{{link-to "Home" "index" class="btn btn-success glyphicon glyphicon-home"}}

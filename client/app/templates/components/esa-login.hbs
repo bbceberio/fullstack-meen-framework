@@ -1,0 +1,23 @@
+<div class="header">
+  <h2>Login Page</h2>
+</div>
+{{#bs-form formLayout=formLayout model=this onSubmit=(action "authenticate") as |form|}}
+  {{form.element controlType="username" label="Username" placeholder="Username" property="username"
+                 id="username" value=username required=true}}
+  {{form.element controlType="password" label="Password" placeholder="Password" property="password"
+                 id="password" value=password required=true helpText="Minimum 6 characters"}}
+  {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Login" type="primary" buttonType="submit"}}
+
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Login via Twitter" pendingText="Authenticating..."
+              resolvedText="Authentication complete!" onClick=(action "signInViaTwitter")}}
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Login via Facebook" pendingText="Authenticating..."
+              resolvedText="Authentication complete!" onClick=(action "signInViaFacebook")}}
+  {{bs-button icon="glyphicon glyphicon-log-in" defaultText="Login via Google" pendingText="Authenticating..."
+              resolvedText="Authentication complete!" onClick=(action "signInViaGoogle")}}
+{{/bs-form}}
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+{{yield}}
